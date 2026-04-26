@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Yardage Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 10px;
+            margin: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th {
+            background: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #999;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        td:first-child {
+            text-align: left;
+            font-weight: bold;
+            background: #f9f9f9;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .button-row {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+        .btn-copy {
+            background: #007bff;
+        }
+        .btn-reset {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⛳ Golf Yardage Tracker</h1>
+        
+        <div class="button-row">
+            <button class="btn-copy" onclick="copyAll()">Copy Data</button>
+            <button class="btn-reset" onclick="clearAll()">Reset</button>
+        </div>
+
+        <table>
+            <tr>
+                <th>Club</th>
+                <th>−</th>
+                <th>Avg</th>
+                <th>+</th>
+            </tr>
+            <tr>
+                <td>Driver</td>
+                <td><input type="number" id="driver_short" onchange="save()"></td>
+                <td><input type="number" id="driver_avg" onchange="save()"></td>
+                <td><input type="number" id="driver_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>5 Wood</td>
+                <td><input type="number" id="5wood_short" onchange="save()"></td>
+                <td><input type="number" id="5wood_avg" onchange="save()"></td>
+                <td><input type="number" id="5wood_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>4 Hybrid</td>
+                <td><input type="number" id="4hybrid_short" onchange="save()"></td>
+                <td><input type="number" id="4hybrid_avg" onchange="save()"></td>
+                <td><input type="number" id="4hybrid_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>5 Iron</td>
+                <td><input type="number" id="5iron_short" onchange="save()"></td>
+                <td><input type="number" id="5iron_avg" onchange="save()"></td>
+                <td><input type="number" id="5iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>6 Iron</td>
+                <td><input type="number" id="6iron_short" onchange="save()"></td>
+                <td><input type="number" id="6iron_avg" onchange="save()"></td>
+                <td><input type="number" id="6iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>7 Iron</td>
+                <td><input type="number" id="7iron_short" onchange="save()"></td>
+                <td><input type="number" id="7iron_avg" onchange="save()"></td>
+                <td><input type="number" id="7iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>8 Iron</td>
+                <td><input type="number" id="8iron_short" onchange="save()"></td>
+                <td><input type="number" id="8iron_avg" onchange="save()"></td>
+                <td><input type="number" id="8iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>9 Iron</td>
+                <td><input type="number" id="9iron_short" onchange="save()"></td>
+                <td><input type="number" id="9iron_avg" onchange="save()"></td>
+                <td><input type="number" id="9iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>U</td>
+                <td><input type="number" id="u_short" onchange="save()"></td>
+                <td><input type="number" id="u_avg" onchange="save()"></td>
+                <td><input type="number" id="u_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>W</td>
+                <td><input type="number" id="w_short" onchange="save()"></td>
+                <td><input type="number" id="w_avg" onchange="save()"></td>
+                <td><input type="number" id="w_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>54°</td>
+                <td><input type="number" id="54_short" onchange="save()"></td>
+                <td><input type="number" id="54_avg" onchange="save()"></td>
+                <td><input type="number" id="54_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>58°</td>
+                <td><input type="number" id="58_short" onchange="save()"></td>
+                <td><input type="number" id="58_avg" onchange="save()"></td>
+                <td><input type="number" id="58_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>60°</td>
+                <td><input type="number" id="60_short" onchange="save()"></td>
+                <td><input type="number" id="60_avg" onchange="save()"></td>
+                <td><input type="number" id="60_long" onchange="save()"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function save() {
+            var data = {};
+            var inputs = document.querySelectorAll('input');
+            inputs.forEach(function(input) {
+                data[input.id] = input.value;
+            });
+            localStorage.setItem('golfData', JSON.stringify(data));
+        }
+
+        function load() {
+            var data = JSON.parse(localStorage.getItem('golfData') || '{}');
+            for (var key in data) {
+                var elem = document.getElementById(key);
+                if (elem) {
+                    elem.value = data[key];
+                }
+            }
+        }
+
+        function copyAll() {
+            var text = 'Golf Yardages:\n\n';
+            var inputs = document.querySelectorAll('input');
+            var lastClub = '';
+            inputs.forEach(function(input) {
+                var id = input.id;
+                var club = id.replace('_short', '').replace('_avg', '').replace('_long', '');
+                if (club !== lastClub) {
+                    lastClub = club;
+                    var short = document.getElementById(club + '_short').value || '—';
+                    var avg = document.getElementById(club + '_avg').value || '—';
+                    var long = document.getElementById(club + '_long').value || '—';
+                    text += club + ': ' + short + ' / ' + avg + ' / ' + long + '\n';
+                }
+            });
+            alert(text);
+        }
+
+        function clearAll() {
+            if (confirm('Clear all data?')) {
+                var inputs = document.querySelectorAll('input');
+                inputs.forEach(function(input) {
+                    input.value = '';
+                });
+                localStorage.clear();
+            }
+        }
+
+        window.onload = load;
+    </script>
+</body>
+</html>
