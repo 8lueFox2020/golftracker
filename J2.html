@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Yardage Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 5px;
+            margin: 0;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 5px 0;
+            font-size: 22px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+        th {
+            background: #333;
+            color: white;
+            padding: 6px 3px;
+            text-align: center;
+            border: 1px solid #999;
+            font-size: 12px;
+        }
+        td {
+            padding: 5px 3px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        td:first-child {
+            text-align: left;
+            font-weight: bold;
+            background: #f9f9f9;
+            padding: 5px 6px;
+            font-size: 12px;
+        }
+        input {
+            width: 100%;
+            padding: 4px 2px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .button-row {
+            text-align: center;
+            margin: 8px 0;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 0;
+            font-size: 13px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            flex: 1;
+            min-width: 80px;
+        }
+        .btn-copy {
+            background: #007bff;
+        }
+        .btn-reset {
+            background: #dc3545;
+        }
+        .file-info {
+            background: #f0f0f0;
+            padding: 6px;
+            border-radius: 3px;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⛳ Golf Yardage Tracker</h1>
+        
+        <div style="background: #f0f0f0; padding: 6px; border-radius: 3px; margin-bottom: 8px; font-size: 11px;">
+            <strong>Current File:</strong> <span id="fileName">None loaded (using device storage)</span>
+        </div>
+        
+        <div class="button-row">
+            <button class="btn-copy" onclick="loadFile()">Load</button>
+            <button class="btn-copy" onclick="saveAs()">Save as</button>
+            <button class="btn-reset" onclick="clearAll()">Reset</button>
+        </div>
+        
+        <input type="file" id="fileInput" accept=".txt" style="display: none;">
+
+        <table>
+            <tr>
+                <th>Club</th>
+                <th>−</th>
+                <th>Avg</th>
+                <th>+</th>
+            </tr>
+            <tr>
+                <td>Driver</td>
+                <td><input type="number" id="driver_short" onchange="save()"></td>
+                <td><input type="number" id="driver_avg" onchange="save()"></td>
+                <td><input type="number" id="driver_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>5W</td>
+                <td><input type="number" id="5wood_short" onchange="save()"></td>
+                <td><input type="number" id="5wood_avg" onchange="save()"></td>
+                <td><input type="number" id="5wood_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>4H</td>
+                <td><input type="number" id="4hybrid_short" onchange="save()"></td>
+                <td><input type="number" id="4hybrid_avg" onchange="save()"></td>
+                <td><input type="number" id="4hybrid_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>5 Iron</td>
+                <td><input type="number" id="5iron_short" onchange="save()"></td>
+                <td><input type="number" id="5iron_avg" onchange="save()"></td>
+                <td><input type="number" id="5iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>6 Iron</td>
+                <td><input type="number" id="6iron_short" onchange="save()"></td>
+                <td><input type="number" id="6iron_avg" onchange="save()"></td>
+                <td><input type="number" id="6iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>7 Iron</td>
+                <td><input type="number" id="7iron_short" onchange="save()"></td>
+                <td><input type="number" id="7iron_avg" onchange="save()"></td>
+                <td><input type="number" id="7iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>8 Iron</td>
+                <td><input type="number" id="8iron_short" onchange="save()"></td>
+                <td><input type="number" id="8iron_avg" onchange="save()"></td>
+                <td><input type="number" id="8iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>9 Iron</td>
+                <td><input type="number" id="9iron_short" onchange="save()"></td>
+                <td><input type="number" id="9iron_avg" onchange="save()"></td>
+                <td><input type="number" id="9iron_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>W</td>
+                <td><input type="number" id="w_short" onchange="save()"></td>
+                <td><input type="number" id="w_avg" onchange="save()"></td>
+                <td><input type="number" id="w_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>U</td>
+                <td><input type="number" id="u_short" onchange="save()"></td>
+                <td><input type="number" id="u_avg" onchange="save()"></td>
+                <td><input type="number" id="u_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>54°</td>
+                <td><input type="number" id="54_short" onchange="save()"></td>
+                <td><input type="number" id="54_avg" onchange="save()"></td>
+                <td><input type="number" id="54_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>58°</td>
+                <td><input type="number" id="58_short" onchange="save()"></td>
+                <td><input type="number" id="58_avg" onchange="save()"></td>
+                <td><input type="number" id="58_long" onchange="save()"></td>
+            </tr>
+            <tr>
+                <td>60°</td>
+                <td><input type="number" id="60_short" onchange="save()"></td>
+                <td><input type="number" id="60_avg" onchange="save()"></td>
+                <td><input type="number" id="60_long" onchange="save()"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function save() {
+            var data = {};
+            var inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(function(input) {
+                data[input.id] = input.value;
+            });
+            localStorage.setItem('golfData', JSON.stringify(data));
+        }
+
+        function load() {
+            var data = JSON.parse(localStorage.getItem('golfData') || '{}');
+            for (var key in data) {
+                var elem = document.getElementById(key);
+                if (elem) {
+                    elem.value = data[key];
+                }
+            }
+        }
+
+        function loadFile() {
+            document.getElementById('fileInput').click();
+        }
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        var lines = event.target.result.split('\n');
+                        var data = {};
+                        
+                        // Parse txt file - each club is on a line like "Driver: 250 / 280 / 300"
+                        for (var i = 0; i < lines.length; i++) {
+                            var line = lines[i].trim();
+                            if (line && line.includes(':')) {
+                                var parts = line.split(':');
+                                var clubName = parts[0].trim();
+                                var values = parts[1].split('/');
+                                
+                                // Find matching input IDs
+                                if (values.length >= 3) {
+                                    var short = values[0].trim();
+                                    var avg = values[1].trim();
+                                    var long = values[2].trim();
+                                    
+                                    // Map club names to IDs
+                                    var mapping = {
+                                        'Driver': 'driver',
+                                        '5W': '5wood',
+                                        '4H': '4hybrid',
+                                        '5 Iron': '5iron',
+                                        '6 Iron': '6iron',
+                                        '7 Iron': '7iron',
+                                        '8 Iron': '8iron',
+                                        '9 Iron': '9iron',
+                                        'U': 'u',
+                                        'W': 'w',
+                                        '54°': '54',
+                                        '58°': '58',
+                                        '60°': '60'
+                                    };
+                                    
+                                    var clubId = mapping[clubName];
+                                    if (clubId) {
+                                        data[clubId + '_short'] = short === '—' ? '' : short;
+                                        data[clubId + '_avg'] = avg === '—' ? '' : avg;
+                                        data[clubId + '_long'] = long === '—' ? '' : long;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // Load data into inputs
+                        for (var key in data) {
+                            var elem = document.getElementById(key);
+                            if (elem) {
+                                elem.value = data[key];
+                            }
+                        }
+                        localStorage.setItem('golfData', JSON.stringify(data));
+                        document.getElementById('fileName').textContent = file.name + ' (' + file.name + ')';
+                        alert('File loaded successfully!');
+                    } catch (err) {
+                        alert('Error loading file. Make sure it\'s a valid golf tracker file.');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function saveAs() {
+            var data = {};
+            var inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(function(input) {
+                data[input.id] = input.value;
+            });
+            
+            // Create readable txt format
+            var clubs = [
+                {name: 'Driver', id: 'driver'},
+                {name: '5W', id: '5wood'},
+                {name: '4H', id: '4hybrid'},
+                {name: '5 Iron', id: '5iron'},
+                {name: '6 Iron', id: '6iron'},
+                {name: '7 Iron', id: '7iron'},
+                {name: '8 Iron', id: '8iron'},
+                {name: '9 Iron', id: '9iron'},
+                {name: 'W', id: 'w'},
+                {name: 'U', id: 'u'},
+                {name: '54°', id: '54'},
+                {name: '58°', id: '58'},
+                {name: '60°', id: '60'}
+            ];
+            
+            var text = 'Golf Yardage Tracker\n';
+            text += '===================\n\n';
+            text += 'Club: Short / Avg / Long\n';
+            text += '------------------------\n\n';
+            
+            clubs.forEach(function(club) {
+                var short = data[club.id + '_short'] || '—';
+                var avg = data[club.id + '_avg'] || '—';
+                var long = data[club.id + '_long'] || '—';
+                text += club.name + ': ' + short + ' / ' + avg + ' / ' + long + '\n';
+            });
+            
+            var userInput = prompt('Enter file name:', 'golf-yardages.txt');
+            if (userInput !== null && userInput.trim() !== '') {
+                var fileName = userInput.trim();
+                if (!fileName.toLowerCase().endsWith('.txt')) {
+                    fileName += '.txt';
+                }
+                var dataBlob = new Blob([text], {type: 'text/plain'});
+                var url = URL.createObjectURL(dataBlob);
+                var link = document.createElement('a');
+                link.href = url;
+                link.download = fileName;
+                link.click();
+                document.getElementById('fileName').textContent = fileName + ' (Downloads folder)';
+                localStorage.setItem('golfData', JSON.stringify(data));
+            }
+        }
+
+        function clearAll() {
+            if (confirm('Clear all data?')) {
+                var inputs = document.querySelectorAll('input[type="number"]');
+                inputs.forEach(function(input) {
+                    input.value = '';
+                });
+                localStorage.clear();
+                document.getElementById('fileName').textContent = 'None loaded (using device storage)';
+            }
+        }
+
+        window.onload = load;
+    </script>
+</body>
+</html>
