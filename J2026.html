@@ -122,52 +122,46 @@
                 <td><input type="number" id="driver_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>5W</td>
-                <td><input type="number" id="5wood_short" onchange="save()"></td>
-                <td><input type="number" id="5wood_avg" onchange="save()"></td>
-                <td><input type="number" id="5wood_long" onchange="save()"></td>
+                <td>3W</td>
+                <td><input type="number" id="3w_short" onchange="save()"></td>
+                <td><input type="number" id="3w_avg" onchange="save()"></td>
+                <td><input type="number" id="3w_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>4H</td>
-                <td><input type="number" id="4hybrid_short" onchange="save()"></td>
-                <td><input type="number" id="4hybrid_avg" onchange="save()"></td>
-                <td><input type="number" id="4hybrid_long" onchange="save()"></td>
+                <td>7W</td>
+                <td><input type="number" id="7w_short" onchange="save()"></td>
+                <td><input type="number" id="7w_avg" onchange="save()"></td>
+                <td><input type="number" id="7w_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>5 Iron</td>
+                <td>5 iron</td>
                 <td><input type="number" id="5iron_short" onchange="save()"></td>
                 <td><input type="number" id="5iron_avg" onchange="save()"></td>
                 <td><input type="number" id="5iron_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>6 Iron</td>
+                <td>6 iron</td>
                 <td><input type="number" id="6iron_short" onchange="save()"></td>
                 <td><input type="number" id="6iron_avg" onchange="save()"></td>
                 <td><input type="number" id="6iron_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>7 Iron</td>
+                <td>7 iron</td>
                 <td><input type="number" id="7iron_short" onchange="save()"></td>
                 <td><input type="number" id="7iron_avg" onchange="save()"></td>
                 <td><input type="number" id="7iron_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>8 Iron</td>
+                <td>8 iron</td>
                 <td><input type="number" id="8iron_short" onchange="save()"></td>
                 <td><input type="number" id="8iron_avg" onchange="save()"></td>
                 <td><input type="number" id="8iron_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>9 Iron</td>
+                <td>9 iron</td>
                 <td><input type="number" id="9iron_short" onchange="save()"></td>
                 <td><input type="number" id="9iron_avg" onchange="save()"></td>
                 <td><input type="number" id="9iron_long" onchange="save()"></td>
-            </tr>
-            <tr>
-                <td>W</td>
-                <td><input type="number" id="w_short" onchange="save()"></td>
-                <td><input type="number" id="w_avg" onchange="save()"></td>
-                <td><input type="number" id="w_long" onchange="save()"></td>
             </tr>
             <tr>
                 <td>U</td>
@@ -176,19 +170,19 @@
                 <td><input type="number" id="u_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>54°</td>
-                <td><input type="number" id="54_short" onchange="save()"></td>
-                <td><input type="number" id="54_avg" onchange="save()"></td>
-                <td><input type="number" id="54_long" onchange="save()"></td>
+                <td>56</td>
+                <td><input type="number" id="56_short" onchange="save()"></td>
+                <td><input type="number" id="56_avg" onchange="save()"></td>
+                <td><input type="number" id="56_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>58°</td>
-                <td><input type="number" id="58_short" onchange="save()"></td>
-                <td><input type="number" id="58_avg" onchange="save()"></td>
-                <td><input type="number" id="58_long" onchange="save()"></td>
+                <td>W</td>
+                <td><input type="number" id="w_short" onchange="save()"></td>
+                <td><input type="number" id="w_avg" onchange="save()"></td>
+                <td><input type="number" id="w_long" onchange="save()"></td>
             </tr>
             <tr>
-                <td>60°</td>
+                <td>60</td>
                 <td><input type="number" id="60_short" onchange="save()"></td>
                 <td><input type="number" id="60_avg" onchange="save()"></td>
                 <td><input type="number" id="60_long" onchange="save()"></td>
@@ -246,18 +240,17 @@
                                     // Map club names to IDs
                                     var mapping = {
                                         'Driver': 'driver',
-                                        '5W': '5wood',
-                                        '4H': '4hybrid',
-                                        '5 Iron': '5iron',
-                                        '6 Iron': '6iron',
-                                        '7 Iron': '7iron',
-                                        '8 Iron': '8iron',
-                                        '9 Iron': '9iron',
+                                        '3W': '3w',
+                                        '7W': '7w',
+                                        '5 iron': '5iron',
+                                        '6 iron': '6iron',
+                                        '7 iron': '7iron',
+                                        '8 iron': '8iron',
+                                        '9 iron': '9iron',
                                         'U': 'u',
+                                        '56': '56',
                                         'W': 'w',
-                                        '54°': '54',
-                                        '58°': '58',
-                                        '60°': '60'
+                                        '60': '60'
                                     };
                                     
                                     var clubId = mapping[clubName];
@@ -298,18 +291,17 @@
             // Create readable txt format
             var clubs = [
                 {name: 'Driver', id: 'driver'},
-                {name: '5W', id: '5wood'},
-                {name: '4H', id: '4hybrid'},
-                {name: '5 Iron', id: '5iron'},
-                {name: '6 Iron', id: '6iron'},
-                {name: '7 Iron', id: '7iron'},
-                {name: '8 Iron', id: '8iron'},
-                {name: '9 Iron', id: '9iron'},
+                {name: '3W', id: '3w'},
+                {name: '7W', id: '7w'},
+                {name: '5 iron', id: '5iron'},
+                {name: '6 iron', id: '6iron'},
+                {name: '7 iron', id: '7iron'},
+                {name: '8 iron', id: '8iron'},
+                {name: '9 iron', id: '9iron'},
                 {name: 'U', id: 'u'},
+                {name: '56', id: '56'},
                 {name: 'W', id: 'w'},
-                {name: '54°', id: '54'},
-                {name: '58°', id: '58'},
-                {name: '60°', id: '60'}
+                {name: '60', id: '60'}
             ];
             
             var text = 'Golf Yardage Tracker\n';
@@ -324,9 +316,10 @@
                 text += club.name + ': ' + short + ' / ' + avg + ' / ' + long + '\n';
             });
             
-            var fileName = prompt('Enter file name:', 'golf-yardages.txt');
-            if (fileName) {
-                if (!fileName.endsWith('.txt')) {
+            var userInput = prompt('Enter file name:', 'golf-yardages.txt');
+            if (userInput !== null && userInput.trim() !== '') {
+                var fileName = userInput.trim();
+                if (!fileName.toLowerCase().endsWith('.txt')) {
                     fileName += '.txt';
                 }
                 var dataBlob = new Blob([text], {type: 'text/plain'});
